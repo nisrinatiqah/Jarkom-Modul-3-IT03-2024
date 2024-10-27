@@ -1,12 +1,10 @@
 # Jarkom-Modul-3-IT03-2024
 
-# Jarkom-Modul-3-IT25-2024
-
 # Anggota Kelompok
 | Nama  | NRP  |
 |----------|----------|
-| Nisrina Atikah | 5027231026 |
-| Nicholas Arya  | 5027231054 |
+| Nisrina Atikah | 50272310 |
+| Nicholas Arya  | 5027231058 |
 
 ## Pembuatan Topologi
 ![image](https://github.com/user-attachments/assets/46562e8e-3f48-4175-bf2a-ef6b1991c4f5)
