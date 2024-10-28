@@ -11,8 +11,6 @@
 
 ## Konfigurasi
 
-
-
 ### Paradis (DHCP Relay)
 ```
 auto eth0
@@ -129,7 +127,13 @@ iface eth0 inet static
 	gateway 10.65.2.0
 ```
 
-### Zeke, Erwin (Client) 
+### Zeke (Client) 
+```
+auto eth0
+iface eth0 inet dhcp
+```
+
+### Erwin (Client) 
 ```
 auto eth0
 iface eth0 inet dhcp
@@ -178,11 +182,18 @@ apt-get install apache2-utils -y
 apt-get install jq -y
 ```
 
-## No.0
+## Nomor 0
 Pulau Paradis telah menjadi tempat yang damai selama 1000 tahun, namun kedamaian tersebut tidak bertahan selamanya. Perang antara kaum Marley dan Eldia telah mencapai puncak. Kaum Marley yang dipimpin oleh Zeke, me-register domain name marley.yyy.com untuk worker Laravel mengarah pada Annie. Namun ternyata tidak hanya kaum Marley saja yang berinisiasi, kaum Eldia ternyata sudah mendaftarkan domain name eldia.yyy.com untuk worker PHP (0) mengarah pada Armin.
 
 ### Membuat script di Fritz untuk memberikan domain marley.it03.com yang menyambung ke IP Annie, dan domain eldia.it03.com yang menyambung ke IP Armin
->Fritz/Script0.sh
+```
+apt-get update
+```
+```
+apt-get install bind9 -y
+```
+
+>no0.sh
 ```
 apt-get update
 apt-get install bind9 -y
@@ -248,13 +259,19 @@ echo "$granz" > /etc/bind/jarkom/eldia.it03.com
 
 service bind9 restart
 ```
-### Test di client menggunakan IP Static Zeke (10.76.1.5) dan Erwin (10.76.2.5)
-![image](https://github.com/user-attachments/assets/b856f626-e063-414e-ad47-e25b21ffb104)
-![image](https://github.com/user-attachments/assets/253ca319-7736-4c1b-9690-28b8260e11a3)
+### Test di client Zeke (10.65.1.5) 
+![WhatsApp Image 2024-10-27 at 00 44 45_32cf43b9](https://github.com/user-attachments/assets/58be0f1b-71a7-4829-816c-fdc788c704a0)
 
-## No.1-5
-Lakukan konfigurasi sesuai dengan peta yang sudah diberikan.
+![WhatsApp Image 2024-10-27 at 00 44 45_2197cda9](https://github.com/user-attachments/assets/b0ed1400-7b92-419c-864a-c722c3819a8c)
 
+
+### Test di client Erwin (10.65.2.5)
+![WhatsApp Image 2024-10-27 at 00 44 45_bf9511bd](https://github.com/user-attachments/assets/5ff8c653-cf94-406a-a2dd-b28cdf43f728)
+
+![WhatsApp Image 2024-10-27 at 00 44 45_643062d8](https://github.com/user-attachments/assets/aa9fcb17-5149-4241-8caa-297e69a8e136)
+
+
+## Nomor 1-5
 Jauh sebelum perang dimulai, ternyata para keluarga bangsawan, Tybur dan Fritz, telah membuat kesepakatan sebagai berikut:
 1. Semua Client harus menggunakan konfigurasi ip address dari keluarga Tybur (dhcp).
 2. Client yang melalui bangsa marley mendapatkan range IP dari [prefix IP].1.05 - [prefix IP].1.25 dan [prefix IP].1.50 - [prefix IP].1.100 (2)
@@ -262,8 +279,15 @@ Jauh sebelum perang dimulai, ternyata para keluarga bangsawan, Tybur dan Fritz, 
 4. Client mendapatkan DNS dari keluarga Fritz dan dapat terhubung dengan internet melalui DNS tersebut (4)
 5. Dikarenakan keluarga Tybur tidak menyukai kaum eldia, maka mereka hanya meminjamkan ip address ke kaum eldia selama 6 menit. Namun untuk kaum marley, keluarga Tybur meminjamkan ip address selama 30 menit. Waktu maksimal dialokasikan untuk peminjaman alamat IP selama 87 menit. (5)
 
-### Membuat script untuk menghubungkan DHCP Relay (Paradis) dengan DHCP Server (Tybur)
->Paradis/Script1.sh
+### Membuat script untuk menghubungkan Paradis (DHCP Relay) dengan Tybur (DHCP Server)
+Instalasi di Paradis
+```
+apt-get update
+```
+```
+apt-get install isc-dhcp-relay -y
+```
+>paradis1.sh
 ```
 apt-get update
 apt install isc-dhcp-relay -y
@@ -291,7 +315,14 @@ echo net.ipv4.ip_forward=1 > /etc/sysctl.conf
 service isc-dhcp-relay restart
 ```
 
->Tybur/Script1.sh
+Instalasi di Tybur
+```
+apt-get update
+```
+```
+apt-get install isc-dhcp-server -y
+```
+>tybur1.sh
 ```
 apt-get update
 apt-get install isc-dhcp-server -y
@@ -341,11 +372,95 @@ service isc-dhcp-server restart
 ```
 
 ### Test setelah client mendapat IP Dynamic dengan konfigurasi lease time yang sudah ditentukan
+(Zeke)
+
 ![image](https://github.com/user-attachments/assets/cb94d6a1-d918-4004-82c0-a6f4950f2231)
+
+(Erwin)
+
 ![image](https://github.com/user-attachments/assets/770a27fa-170d-4ce8-8219-77bd2a564276)
 
-### Test ping marley.it03.com dan eldia.it03.com setelah mendapat ip dynamic
-![image](https://github.com/user-attachments/assets/3dbf6b7c-1fc4-4aed-9f7b-154b44766ca4)
-![image](https://github.com/user-attachments/assets/bb1a0ba2-00e5-44bb-9ac5-d74d257316d7)
+### Test ping marley.it03.com dan eldia.it03.com setelah mendapat ip dynamic (di nomer 0)
+Sebelum tes ping instalasi di client (Zeke dan Erwin)
+```
+apt-get update
+```
+```
+apt-get install lynx -y
+```
+```
+apt-get install htop -y
+```
+```
+apt-get install apache2-utils -y
+```
+```
+apt-get install jq -y
+```
 
 
+## No 6
+Armin berinisiasi untuk memerintahkan setiap worker PHP untuk melakukan konfigurasi virtual host untuk website berikut https://intip.in/BangsaEldia dengan menggunakan php 7.3 (6)
+### Buat script di Armin, Eren, Mikasa
+>armin6.sh/eren6.sh/mikasa6.sh
+```
+#!/bin/bash
+ 
+# Update package list and install necessary packages
+apt-get update
+apt-get install lynx nginx wget unzip php7.3 php-fpm -y
+ 
+# Start PHP-FPM and Nginx services
+service php7.3-fpm start
+service nginx start
+ 
+# Create download directory
+mkdir -p /var/www/html/download/
+ 
+# Download the ZIP file from Google Drive
+wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1yliJkxu-3XmgJ6Xb37pGc2Jht5NTO9oj' -O /var/www/html/download/bangsa-eldia.zip
+ 
+# Unzip the downloaded file
+unzip /var/www/html/download/bangsa-eldia.zip -d /var/www/html/download
+ 
+# Move extracted files to the web root
+mv /var/www/html/download/bangsa-eldia/modul-3/* /var/www/html/
+ 
+# Clean up by removing the download directory
+rm -rf /var/www/html/download/
+ 
+# Configure Nginx
+cat <<EOL > /etc/nginx/sites-available/it03.conf
+server {
+	listen 80;
+ 
+	root /var/www/html;
+ 
+	index index.php index.html index.htm;
+ 
+	server_name _;
+ 
+	location / {
+    	try_files \$uri \$uri/ /index.php?\$query_string;
+	}
+ 
+	location ~ \.php$ {
+    	include snippets/fastcgi-php.conf;
+    	fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+	}
+ 
+	error_log /var/log/nginx/it03_error.log;
+	access_log /var/log/nginx/it03_access.log;
+}
+EOL
+ 
+# Enable the site configuration
+ln -s /etc/nginx/sites-available/it03.conf /etc/nginx/sites-enabled/
+ 
+# Remove the default Nginx site
+rm /etc/nginx/sites-enabled/default
+ 
+# Restart Nginx and PHP-FPM services
+service nginx restart
+service php7.3-fpm restart
+```
