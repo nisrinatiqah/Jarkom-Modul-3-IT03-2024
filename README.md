@@ -8,6 +8,14 @@
 | Nisrina Atiqah Dwiputri Ridzki| 5027231075 |
 | Nicholas Arya Krisnugroho Rerangin| 5027231058 |
 
+# Daftar Isi
+
+- [Topologi](#topologi)
+- [KOnfigurasi](#konfigurasi)
+- [Nomor 0](#nomor-0)
+- [Nomor 1-5](#nomor-1-5)
+- [Nomor 6](#nomor-6)
+
 ## Topologi
 ![image](https://github.com/user-attachments/assets/46562e8e-3f48-4175-bf2a-ef6b1991c4f5)
 
